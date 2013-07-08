@@ -20,6 +20,7 @@
 
 #Persistent
 #SingleInstance force
+#NoTrayIcon
 
 GroupAdd, WindowGroup, ahk_class FuTTY
 GroupAdd, WindowGroup, ahk_class KiTTY

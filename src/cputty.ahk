@@ -39,7 +39,7 @@ AddToCluster()
     Cluster[WinActive] := 1
 }
 
-Cluster()
+ClusterKeyboard()
 {
     global Cluster
     WinGet, WinActive, ID, A
@@ -48,6 +48,19 @@ Cluster()
         if (WinActive != WinCluster AND Cluster[WinActive])
         {
             ControlSend, , % "{Blind}{" RegExReplace(A_ThisHotkey, "[*$~]") "}", % "ahk_id " WinCluster
+        }
+    }
+}
+
+ClusterMouse()
+{
+    global Cluster
+    WinGet, WinActive, ID, A
+    for WinCluster, WinTitle in Cluster
+    {
+        if (WinActive != WinCluster AND Cluster[WinActive])
+        {
+            ControlClick, , ahk_id %WinCluster%, , RIGHT
         }
     }
 }
@@ -74,6 +87,8 @@ StopClustering()
 $<^<!PgUp::AddToCluster()
 $<^<!PgDn::RemoveFromCluster()
 $<^<!End::StopClustering()
+
+~*RButton::ClusterMouse()
 
 ~*SC029::
 ~*SC002::
@@ -192,6 +207,6 @@ $<^<!End::StopClustering()
 ~*NumpadUp::
 ~*NumpadPgUp::
 ~*NumpadDel::
-Cluster()
+ClusterKeyboard()
 
 #IfWinActive

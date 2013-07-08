@@ -76,6 +76,12 @@ RemoveFromCluster()
 StopClustering()
 {
     global Cluster
+    if ("" = Cluster.MaxIndex())
+    {
+        MsgBox, 36, , Do you really want to close cPuTTY?
+        IfMsgBox, Yes
+            ExitApp
+    }
     for WinCluster, WinTitle in Cluster
     {
         WinSetTitle, ahk_id %WinCluster%, , %WinTitle%

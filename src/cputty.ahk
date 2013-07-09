@@ -21,6 +21,7 @@
 #NoTrayIcon
 #Persistent
 #SingleInstance force
+#WinActivateForce
 
 GroupAdd, WindowGroup, ahk_class FuTTY
 GroupAdd, WindowGroup, ahk_class KiTTY
@@ -66,6 +67,15 @@ ClusterMouse()
     }
 }
 
+FocusCluster()
+{
+    global Cluster
+    for WinCluster, None in Cluster
+    {
+        WinActivate ahk_id %WinCluster%
+    }
+}
+
 RemoveFromCluster()
 {
     global Cluster
@@ -88,6 +98,8 @@ StopClustering()
     }
     Cluster := []
 }
+
+$<^<!Home::FocusCluster()
 
 #IfWinActive ahk_group WindowGroup
 

@@ -18,9 +18,9 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ; THE SOFTWARE.
 
+#NoTrayIcon
 #Persistent
 #SingleInstance force
-#NoTrayIcon
 
 GroupAdd, WindowGroup, ahk_class FuTTY
 GroupAdd, WindowGroup, ahk_class KiTTY
@@ -44,7 +44,7 @@ ClusterKeyboard()
 {
     global Cluster
     WinGet, WinActive, ID, A
-    for WinCluster, WinTitle in Cluster
+    for WinCluster, None in Cluster
     {
         if (WinActive != WinCluster AND Cluster[WinActive])
         {
@@ -57,7 +57,7 @@ ClusterMouse()
 {
     global Cluster
     WinGet, WinActive, ID, A
-    for WinCluster, WinTitle in Cluster
+    for WinCluster, None in Cluster
     {
         if (WinActive != WinCluster AND Cluster[WinActive])
         {

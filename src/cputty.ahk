@@ -92,7 +92,7 @@ StopClustering()
         IfMsgBox, Yes
             ExitApp
     }
-    for WinCluster, WinTitle in Cluster
+    for WinCluster, None in Cluster
     {
         WinSetTitle, ahk_id %WinCluster%, , %WinTitle%
     }

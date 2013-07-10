@@ -227,5 +227,6 @@ $<^<!End::StopClustering()
 ~*NumpadPgUp::
 ~*NumpadDel::
 ClusterKeyboard()
+return
 
 #IfWinActive

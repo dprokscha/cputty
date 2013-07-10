@@ -24,6 +24,11 @@ Are you one of the poor who have to make the same changes to a file on multiple 
 * Easy to use, works like expected :smile:
 
 ### Installing cPuTTY
+* Download the attached ZIP file of [the latest release](https://github.com/dprokscha/cputty/releases)
+* Execute *cputty.exe* or *cputty_x64.exe* (for Windows 64-bit)
+* That's all - cPuTTY is running now!
+
+cPuTTY should work with Windows Vista, Windows 7 and later.
 
 ### Working with cPuTTY
 * Start cPuTTY

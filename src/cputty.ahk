@@ -92,10 +92,6 @@ StopClustering()
         IfMsgBox, Yes
             ExitApp
     }
-    for WinCluster, None in Cluster
-    {
-        WinSetTitle, ahk_id %WinCluster%, , %WinTitle%
-    }
     Cluster := []
 }
 

@@ -177,6 +177,14 @@ $<^<!PgDn::RemoveFromCluster()
 ~*F22::
 ~*F23::
 ~*F24::
+~*LWin::
+~*RWin::
+~*LCtrl::
+~*RCtrl::
+~*LAlt::
+~*RAlt::
+~*LShift::
+~*RShift::
 ~*Space::
 ~*Tab::
 ~*Enter::

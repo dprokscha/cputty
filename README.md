@@ -12,7 +12,7 @@ A real cluster solution for PuTTY
 [License](#license)
 
 ### What the...?
-Are you one of the poor who have to make the same changes to a file on multiple servers with PuTTY? You don't want to do this manually on each server? You are tired of not working cluster solutions for PuTTY? You are still searching a tool which is a real cluster for PuTTY? Then you should give cPuTTY a try, your search might be over. cPuTTY recognises all keyboard and mouse events which were sent to a PuTTY window and forwards them to all other clustered PuTTY windows. Type character by character for multiple windows - in real-time!
+Are you one of the poor who have to make the same changes to a file on multiple servers with PuTTY? You don't want to do this manually on each server? You are tired of not working cluster solutions for PuTTY? You are still searching a tool which is a real cluster for PuTTY? Then you should give cPuTTY a try, your search might be over. cPuTTY recognises all keyboard and mouse events which were sent to a PuTTY window and forwards them to all other clustered PuTTY windows. Type character by character once for multiple windows - in real-time!
 
 ### Features
 * Add PuTTY windows to a cluster, remove them from a cluster or kill the whole cluster with shortcuts

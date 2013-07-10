@@ -96,12 +96,12 @@ StopClustering()
 }
 
 $<^<!Home::FocusCluster()
+$<^<!End::StopClustering()
 
 #IfWinActive ahk_group WindowGroup
 
 $<^<!PgUp::AddToCluster()
 $<^<!PgDn::RemoveFromCluster()
-$<^<!End::StopClustering()
 
 ~*RButton::ClusterMouse()
 

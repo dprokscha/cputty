@@ -88,7 +88,7 @@ StopClustering()
     global Cluster
     if ("" = Cluster.MaxIndex())
     {
-        MsgBox, 36, , Do you really want to close cPuTTY?
+        MsgBox, 36, cPuTTY , Do you really want to close cPuTTY?
         IfMsgBox, Yes
             ExitApp
     }

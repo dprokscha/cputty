@@ -53,7 +53,7 @@ Ignore it. Its a false positive.
 ##### How can I start cPuTTY automatically on windows startup?
 Simply create a shortcut of *cputty.exe* (or *cputty_x64.exe*) and move it to the autostart folder located in the Windows start menu.
 ##### The right-click (pasting things from the clipboard) does not work. What I am doing wrong?
-Due to technical reasons the right-click only works for active PuTTY windows. Please activate a PuTTY window before you make right-click.
+Due to technical reasons the right-click only works for active PuTTY windows. Please activate a PuTTY window before you right-click.
 ##### How can I change the default shortcuts of cPuTTY?
 Feel free to [download the source](cputty/cputty.ahk) and to change it - it is all made with [AutoHotKey](http://autohotkey.com/).
 ##### I have another question, bug or feature request.

@@ -49,7 +49,7 @@ cPuTTY should work with Windows Vista, Windows 7 and later.
 
 ### Troubleshooting
 ##### My antivirus software detects cPuTTY as a virus.
-Ignore it. Its a false positive.
+Ignore it. It's a false positive.
 ##### How can I start cPuTTY automatically on windows startup?
 Simply create a shortcut of *cputty.exe* (or *cputty_x64.exe*) and move it to the autostart folder located in the Windows start menu.
 ##### The right-click (pasting things from the clipboard) does not work. What I am doing wrong?

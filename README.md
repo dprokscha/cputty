@@ -17,7 +17,6 @@ Are you one of the poor who have to make the same changes to a file on multiple 
 ### Features
 * Add PuTTY windows to a cluster, remove them from a cluster or kill the whole cluster with shortcuts
 * All keyboard and mouse events within a cluster are forwarded to all other clustered PuTTY windows
-* Type character by character in multiple PuTTY windows - in real-time
 * Each key and shortcut on your keyboard - even mouse commands (right-click only) - are supported
 * PuTTY forks like FuTTY, KiTTY, PieTTY and TuTTY are also supported
 * Fully support for UNIX commands like ``vi``

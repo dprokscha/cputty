@@ -35,6 +35,7 @@ cPuTTY should work with Windows Vista, Windows 7 and later.
 * Open multiple SHH connections with PuTTY
 * Select a PuTTY window and press ``Ctrl`` + ``Alt`` + ``Page Up`` to add it to the cluster
 * Add other PuTTY windows to the cluster as described above
+* You can add all opened PuTTY windows to the cluster by pressing ``Ctrl`` + ``Alt`` + ``Insert``
 * Now type something in one of the windows you have added to the cluster and have a look to the other clustered windows
 * Play a bit - everything you do in a clustered window will be imitated by the other clustered windows
 * To remove a window from a cluster, press ``Ctrl`` + ``Alt`` + ``Page Down``
@@ -44,6 +45,7 @@ cPuTTY should work with Windows Vista, Windows 7 and later.
 ### Shortcuts
 ``Ctrl`` + ``Alt`` + ``Page Up`` - Adds the active PuTTY window to the cluster.  
 ``Ctrl`` + ``Alt`` + ``Page Down`` - Removes the active PuTTY window from the cluster.  
+``Ctrl`` + ``Alt`` + ``Insert`` - Adds all opened PuTTY windows to the cluster.  
 ``Ctrl`` + ``Alt`` + ``Home`` - Brings all clustered windows to the top.  
 ``Ctrl`` + ``Alt`` + ``End`` - Removes all windows from the cluster. Closes cPuTTY, if the cluster is empty.
 

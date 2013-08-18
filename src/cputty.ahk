@@ -41,6 +41,15 @@ AddToCluster()
     Cluster[WinActive] := 1
 }
 
+AllToCluster()
+{
+    global Cluster
+    WinGet AllWindows, List, ahk_group WindowGroup
+    Loop %AllWindows% {
+        Cluster[AllWindows%A_Index%] := 1
+    }
+}
+
 ClusterKeyboard()
 {
     global Cluster
@@ -95,6 +104,7 @@ StopClustering()
     Cluster := []
 }
 
+$<^<!Insert::AllToCluster()
 $<^<!Home::FocusCluster()
 $<^<!End::StopClustering()
 

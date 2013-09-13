@@ -166,8 +166,6 @@ class Keys {
     static Up          := [0     , 1       , 0x00, 0x00]
 }
 
-Cluster := []
-
 AddToCluster()
 {
     global Cluster

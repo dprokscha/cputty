@@ -292,11 +292,14 @@ ClusterMouse()
     }
 }
 
-FocusCluster()
+FocusCluster(Group := 0)
 {
     global Cluster
-    for WinClustered, Group in Cluster {
-        WinActivate ahk_id %WinClustered%
+    for WinClustered, None in Cluster {
+        if (Cluster[WinClustered] == Group) {
+            WinActivate ahk_id %WinClustered%
+            Break
+        }
     }
 }
 
@@ -319,7 +322,17 @@ StopClustering()
 }
 
 $<^<!Insert::AllToCluster()
-$<^<!Home::FocusCluster()
+$<^<!SC002::FocusCluster(1)
+$<^<!SC003::FocusCluster(2)
+$<^<!SC004::FocusCluster(3)
+$<^<!SC005::FocusCluster(4)
+$<^<!SC006::FocusCluster(5)
+$<^<!SC007::FocusCluster(6)
+$<^<!SC008::FocusCluster(7)
+$<^<!SC009::FocusCluster(8)
+$<^<!SC00A::FocusCluster(9)
+$<^<!SC00B::FocusCluster(0)
+$<^<!Home::FocusCluster(0)
 $<^<!End::StopClustering()
 
 #IfWinActive ahk_group WindowGroup

@@ -180,11 +180,13 @@ For Identifier, None In Keys {
     }
 }
 
-AddToCluster()
+AddToCluster(Group := 0)
 {
+    global AltDown
     global Cluster
     WinGet, WinActive, ID, A
-    Cluster[WinActive] := 1
+    Cluster[WinActive] := Group
+    AltDown := 0
 }
 
 AllToCluster()
@@ -192,7 +194,7 @@ AllToCluster()
     global Cluster
     WinGet AllWindows, List, ahk_group WindowGroup
     Loop %AllWindows% {
-        Cluster[AllWindows%A_Index%] := 1
+        Cluster[AllWindows%A_Index%] := 0
     }
 }
 
@@ -202,7 +204,7 @@ ClusterKeyDown()
     global Cluster
     ; Omit unclustered windows
     WinGet, WinActive, ID, A
-    if (!Cluster[WinActive]) {
+    if ("" == Cluster[WinActive]) {
         return
     }
     ; Prepare post
@@ -228,8 +230,8 @@ ClusterKeyDown()
         LParam := LParam | 1 << 24
     }
     ; Post to clustered windows
-    for WinClustered, None in Cluster {
-        if (WinActive != WinClustered) {
+    for WinClustered, Group in Cluster {
+        if (WinActive != WinClustered && Cluster[WinActive] == Group) {
             PostMessage, Message, VirtualKey, LParam, , ahk_id %WinClustered%
         }
     }
@@ -241,7 +243,7 @@ ClusterKeyUp()
     global Cluster
     ; Omit unclustered windows
     WinGet, WinActive, ID, A
-    if (!Cluster[WinActive]) {
+    if ("" == Cluster[WinActive]) {
         return
     }
     ; Prepare post
@@ -269,8 +271,8 @@ ClusterKeyUp()
         LParam := LParam | 1 << 24
     }
     ; Post to clustered windows
-    for WinClustered, None in Cluster {
-        if (WinActive != WinClustered) {
+    for WinClustered, Group in Cluster {
+        if (WinActive != WinClustered && Cluster[WinActive] == Group) {
             PostMessage, Message, VirtualKey, LParam, , ahk_id %WinClustered%
         }
     }
@@ -280,11 +282,11 @@ ClusterMouse()
 {
     global Cluster
     WinGet, WinActive, ID, A
-    if (!Cluster[WinActive]) {
+    if ("" == Cluster[WinActive]) {
         return
     }
-    for WinClustered, None in Cluster {
-        if (WinActive != WinClustered) {
+    for WinClustered, Group in Cluster {
+        if (WinActive != WinClustered && Cluster[WinActive] == Group) {
             ControlClick, , ahk_id %WinClustered%, , RIGHT
         }
     }
@@ -293,7 +295,7 @@ ClusterMouse()
 FocusCluster()
 {
     global Cluster
-    for WinClustered, None in Cluster {
+    for WinClustered, Group in Cluster {
         WinActivate ahk_id %WinClustered%
     }
 }
@@ -322,7 +324,17 @@ $<^<!End::StopClustering()
 
 #IfWinActive ahk_group WindowGroup
 
-$<^<!PgUp::AddToCluster()
+$<^<!SC002::AddToCluster(1)
+$<^<!SC003::AddToCluster(2)
+$<^<!SC004::AddToCluster(3)
+$<^<!SC005::AddToCluster(4)
+$<^<!SC006::AddToCluster(5)
+$<^<!SC007::AddToCluster(6)
+$<^<!SC008::AddToCluster(7)
+$<^<!SC009::AddToCluster(8)
+$<^<!SC00A::AddToCluster(9)
+$<^<!SC00B::AddToCluster(0)
+$<^<!PgUp::AddToCluster(0)
 $<^<!PgDn::RemoveFromCluster()
 
 ~*RButton::ClusterMouse()

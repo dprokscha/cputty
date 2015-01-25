@@ -305,9 +305,11 @@ FocusCluster(Group := 0)
 
 RemoveFromCluster()
 {
+    global AltDown
     global Cluster
     WinGet, WinActive, ID, A
     Cluster.Remove(WinActive, "")
+    AltDown := 0
 }
 
 StopClustering()

@@ -7,6 +7,7 @@ A real cluster solution for PuTTY
 [Installing cPuTTY](#installing-cputty)  
 [Working with cPuTTY](#working-with-cputty)  
 [Shortcuts](#shortcuts)  
+[Extended usage](#extended-usage)  
 [Troubleshooting](#troubleshooting)  
 [Acknowledgements](#acknowledgements)  
 [License](#license)
@@ -43,11 +44,15 @@ cPuTTY should work with Windows Vista, Windows 7 and later.
 * Press ``Ctrl`` + ``Alt`` + ``Home`` to bring all clustered windows to the top
 
 ### Shortcuts
-``Ctrl`` + ``Alt`` + ``Page Up`` - Adds the active PuTTY window to the cluster.  
-``Ctrl`` + ``Alt`` + ``Page Down`` - Removes the active PuTTY window from the cluster.  
-``Ctrl`` + ``Alt`` + ``Insert`` - Adds all opened PuTTY windows to the cluster.  
-``Ctrl`` + ``Alt`` + ``Home`` - Brings all clustered windows to the top.  
-``Ctrl`` + ``Alt`` + ``End`` - Removes all windows from the cluster. Closes cPuTTY, if the cluster is empty.
+``Ctrl`` + ``Alt`` + ``Page Up`` - Adds the active PuTTY window to the default cluster.  
+``Ctrl`` + ``Alt`` + ``0-9`` - Adds the active PuTTY window to a cluster group (see [extended usage](#extended-usage))
+``Ctrl`` + ``Alt`` + ``Page Down`` - Removes the active PuTTY window from its cluster.  
+``Ctrl`` + ``Alt`` + ``Insert`` - Adds all opened PuTTY windows to the default cluster.  
+``Ctrl`` + ``Alt`` + ``Home`` - Brings all windows from the default cluster to the top.  
+``Ctrl`` + ``Alt`` + ``End`` - Removes all windows from the cluster. Closes cPuTTY, if all clusters are empty.
+
+### Extended usage
+cPuTTY allows up to ten grouped clusters. For example, open four PuTTY windows. For the first both press ``Ctrl`` + ``Alt`` + ``1``, for the last both ``Ctrl`` + ``Alt`` + ``2``. You have created two standalone clusters. By opening more PuTTY windows and pressing ``Ctrl`` + ``Alt`` + ``0-9`` you can easily extend your clusters. Please note, that ``0`` is the default cluster. This means, ``Ctrl`` + ``Alt`` + ``Page Up`` and ``Ctrl`` + ``Alt`` + ``0`` are equal. If a PuTTY window is already clustered, you can move it with ``Ctrl`` + ``Alt`` + ``0-9`` to any other cluster. While no PuTTY window is active, press ``Ctrl`` + ``Alt`` + ``0-9`` to bring your clusters to the top.
 
 ### Troubleshooting
 ##### My antivirus software detects cPuTTY as a virus.

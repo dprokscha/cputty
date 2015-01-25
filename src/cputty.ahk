@@ -166,6 +166,20 @@ class Keys {
     static Up          := [0     , 1       , 0x00, 0x00]
 }
 
+For Identifier, None In Keys {
+    if ("__Class" != Identifier) {
+        Hotkey, IfWinActive, ahk_group WindowGroup
+        Hotkey, % "~*" Identifier, ClusterKeyDown
+        Hotkey, % "~*" Identifier " up", ClusterKeyUp
+        if (0 == Keys[Identifier][3]) {
+            Keys[Identifier][3] := GetKeySC(Identifier)
+        }
+        if (0 == Keys[Identifier][4]) {
+            Keys[Identifier][4] := GetKeyVK(Identifier)
+        }
+    }
+}
+
 AddToCluster()
 {
     global Cluster
@@ -300,20 +314,6 @@ StopClustering()
             ExitApp
     }
     Cluster := []
-}
-
-For Identifier, None In Keys {
-    if ("__Class" != Identifier) {
-        Hotkey, IfWinActive, ahk_group WindowGroup
-        Hotkey, % "~*" Identifier, ClusterKeyDown
-        Hotkey, % "~*" Identifier " up", ClusterKeyUp
-        if (0 == Keys[Identifier][3]) {
-            Keys[Identifier][3] := GetKeySC(Identifier)
-        }
-        if (0 == Keys[Identifier][4]) {
-            Keys[Identifier][4] := GetKeyVK(Identifier)
-        }
-    }
 }
 
 $<^<!Insert::AllToCluster()

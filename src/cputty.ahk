@@ -29,7 +29,6 @@ GroupAdd, WindowGroup, ahk_class PieTTY
 GroupAdd, WindowGroup, ahk_class PuTTY
 GroupAdd, WindowGroup, ahk_class TuTTY
 GroupAdd, WindowGroup, ahk_class TTYPLUSMAIN
-GroupAdd, WindowGroup, ahk_class WindowsForms10.Window.8.app.0.3ce0bb8
 GroupAdd, WindowGroup, ahk_class PUTTYCS_WND_CLASS
 
 AltDown := 0

@@ -65,7 +65,7 @@ Please use the [GitHub Issue Tracker](https://github.com/dprokscha/cputty/issues
 Special thanks goes to [Dean Householder](http://www.deanhouseholder.com/). Your [PuTTY Keystroke Sender](http://www.deanhouseholder.com/projects/putty-keystroke-sender/) and finally its [source](http://www.autohotkey.com/board/topic/84935-send-keystrokes-to-multiple-windows/?p=541210) inspired me to develop a improved version of your idea.
 
 ### License
-Copyright (c) 2013 Daniel Prokscha
+Copyright (c) 2015 Daniel Prokscha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

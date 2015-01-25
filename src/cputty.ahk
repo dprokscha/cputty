@@ -298,7 +298,6 @@ FocusCluster(Group := 0)
     for WinClustered, None in Cluster {
         if (Cluster[WinClustered] == Group) {
             WinActivate ahk_id %WinClustered%
-            Break
         }
     }
 }

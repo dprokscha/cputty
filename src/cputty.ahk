@@ -312,11 +312,24 @@ RemoveFromCluster()
 
 StopClustering()
 {
+    global AltDown
     global Cluster
+    WinGet, WinActive, ID, A
     if ("" == Cluster.MaxIndex()) {
         MsgBox, 36, cPuTTY, Do you really want to close cPuTTY?
         IfMsgBox, Yes
             ExitApp
+    }
+    AltDown := 0
+    if ("" != Cluster[WinActive]) {
+        Tmp := []
+        for WinClustered, Group in Cluster {
+            if (Cluster[WinActive] != Group) {
+                Tmp[WinClustered] := Group
+            }
+        }
+        Cluster := Tmp
+        return
     }
     Cluster := []
 }

@@ -57,7 +57,7 @@ Simply create a shortcut of *cputty.exe* (or *cputty_x64.exe*) and move it to th
 ##### The right-click (pasting things from the clipboard) does not work. What I am doing wrong?
 Due to technical reasons the right-click only works for active PuTTY windows. Please activate a PuTTY window before you right-click.
 ##### How can I change the default shortcuts of cPuTTY?
-Feel free to [download the source](src/cputty.ahk) and to change it - it is all made with [AutoHotKey](http://autohotkey.com/).
+Feel free to [download the source](src/cputty.ahk) and to change it - it is all made with [AutoHotKey](https://github.com/Lexikos/AutoHotkey_L).
 ##### I have another question, bug or feature request.
 Please use the [GitHub Issue Tracker](https://github.com/dprokscha/cputty/issues).
 

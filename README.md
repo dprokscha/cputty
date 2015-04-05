@@ -2,14 +2,14 @@
 A real cluster solution for PuTTY
 
 ### Contents
-[What the...?](#what-the)
-[Features](#features)
-[Installing cPuTTY](#installing-cputty)
-[Working with cPuTTY](#working-with-cputty)
-[Shortcuts](#shortcuts)
-[Extended usage](#extended-usage)
-[Troubleshooting](#troubleshooting)
-[Acknowledgements](#acknowledgements)
+[What the...?](#what-the)  
+[Features](#features)  
+[Installing cPuTTY](#installing-cputty)  
+[Working with cPuTTY](#working-with-cputty)  
+[Shortcuts](#shortcuts)  
+[Extended usage](#extended-usage)  
+[Troubleshooting](#troubleshooting)  
+[Acknowledgements](#acknowledgements)  
 [License](#license)
 
 ### What the...?
@@ -46,12 +46,12 @@ cPuTTY should work with Windows Vista, Windows 7 and later.
 * Press ``Ctrl`` + ``Alt`` + ``Home`` to bring all clustered windows to the top
 
 ### Shortcuts
-``Ctrl`` + ``Alt`` + ``Page Up`` - Adds the active PuTTY window to the default cluster.
-``Ctrl`` + ``Alt`` + ``0-9`` - Adds the active PuTTY window to a cluster group (see [extended usage](#extended-usage))
-``Ctrl`` + ``Alt`` + ``Page Down`` - Removes the active PuTTY window from its cluster.
-``Ctrl`` + ``Alt`` + ``Insert`` - Adds all opened PuTTY windows to the default cluster.
-``Ctrl`` + ``Alt`` + ``Home`` - Brings all windows from the default cluster to the top.
-``Ctrl`` + ``Alt`` + ``End`` - Removes all windows from the cluster. Closes cPuTTY, if all clusters are empty.
+``Ctrl`` + ``Alt`` + ``Page Up`` - Adds the active PuTTY window to the default cluster.  
+``Ctrl`` + ``Alt`` + ``0-9`` - Adds the active PuTTY window to a cluster group (see [extended usage](#extended-usage))  
+``Ctrl`` + ``Alt`` + ``Page Down`` - Removes the active PuTTY window from its cluster.  
+``Ctrl`` + ``Alt`` + ``Insert`` - Adds all opened PuTTY windows to the default cluster.  
+``Ctrl`` + ``Alt`` + ``Home`` - Brings all windows from the default cluster to the top.  
+``Ctrl`` + ``Alt`` + ``End`` - Removes all windows from the cluster. Closes cPuTTY, if all clusters are empty.  
 ``Ctrl`` + ``Alt`` + ``NumPad1-3`` - Tile PuTTY windows using 1 to 3 monitors.
 
 ### Extended usage

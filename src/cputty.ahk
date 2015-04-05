@@ -1,15 +1,15 @@
 ; Copyright (c) 2015 Daniel Prokscha
-; 
+;
 ; Permission is hereby granted, free of charge, to any person obtaining a copy
 ; of this software and associated documentation files (the "Software"), to deal
 ; in the Software without restriction, including without limitation the rights
 ; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 ; copies of the Software, and to permit persons to whom the Software is
 ; furnished to do so, subject to the following conditions:
-; 
+;
 ; The above copyright notice and this permission notice shall be included in
 ; all copies or substantial portions of the Software.
-; 
+;
 ; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 ; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 ; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -335,6 +335,69 @@ StopClustering()
     Cluster := []
 }
 
+;How many monitors to use for tiling
+TileCluster(usemons := 1)
+{
+    ; number of putty windows in all Clusters
+    global Cluster
+    for a,b in Cluster {
+        total++
+    }
+    if (total<1)
+        return
+
+    ; number of screens to tile on
+    SysGet, monitors, 80 ;SM_CMONITORS
+    if (usemons>monitors)
+        usemons := monitors
+
+    Loop, %usemons% {
+        ; windows per this screen
+        if (A_Index = usemons)
+            num := total
+        else {
+            num := Ceil(total/usemons)
+            total -= num
+        }
+        rows := Floor(Sqrt(num))
+        cols := Ceil(num/rows)
+
+        if(usemons=1) {
+            SysGet, prim, MonitorPrimary
+            SysGet, mwa, MonitorWorkArea, %prim%
+        }
+        else
+            SysGet, mwa, MonitorWorkArea, %A_Index%
+        puttyWidth := (mwaRight - mwaLeft)/cols
+        puttyHeight := (mwaBottom - mwaTop)/rows
+        yPos := mwaTop
+        xPos := mwaLeft
+
+        i:=0
+        iMax:=num*A_Index
+        iMin:=num*(A_Index-1)
+        ;MsgBox %A_Index% monitor %xPos%,%yPos% start, %num% windows, %cols%x%rows%, %iMin%-%iMax%
+        for id, None in Cluster {
+            i++
+            if (i>=iMin and i<=iMax) {
+                WinActivate ahk_id %id%
+                WM_ENTERSIZEMOVE=0x0231
+                WM_EXITSIZEMOVE=0x0232
+                SendMessage, WM_ENTERSIZEMOVE
+                WinMove, ahk_id %id% , , xPos, yPos, puttyWidth, puttyHeight
+                SendMessage, WM_EXITSIZEMOVE
+                yCount++
+                yPos := yPos + puttyHeight
+                if (yCount >= rows) {
+                    xPos := xPos + puttyWidth
+                    yPos := 0
+                    yCount := 0
+                }
+            }
+        }
+    }
+}
+
 $<^<!Insert::AllToCluster()
 $<^<!SC002::FocusCluster(1)
 $<^<!SC003::FocusCluster(2)
@@ -348,6 +411,9 @@ $<^<!SC00A::FocusCluster(9)
 $<^<!SC00B::FocusCluster(0)
 $<^<!Home::FocusCluster(0)
 $<^<!End::StopClustering()
+$<^<!Numpad1::TileCluster(1)
+$<^<!Numpad2::TileCluster(2)
+$<^<!Numpad3::TileCluster(3)
 
 #IfWinActive ahk_group WindowGroup
 

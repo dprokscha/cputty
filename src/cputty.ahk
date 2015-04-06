@@ -34,6 +34,7 @@ GroupAdd, WindowGroup, ahk_class PUTTYCS_WND_CLASS
 
 AltDown := 0
 Cluster := []
+Caption := 1
 
 class Keys {
     ; Identifier       := [SYSKEY, Extended, SC  , VK  ]
@@ -340,8 +341,9 @@ TileCluster(usemons := 1)
 {
     ; number of putty windows in all Clusters
     global Cluster
-    for a,b in Cluster {
-        total++
+    for id, None in Cluster {
+        IfWinExist, ahk_id %id%
+            total++
     }
     if (total<1)
         return
@@ -351,12 +353,14 @@ TileCluster(usemons := 1)
     if (usemons>monitors)
         usemons := monitors
 
+    iMax:=1
+    iMin:=1
     Loop, %usemons% {
         ; windows per this screen
         if (A_Index = usemons)
             num := total
         else {
-            num := Ceil(total/usemons)
+            num := Ceil(total/(usemons - A_Index + 1))
             total -= num
         }
         rows := Floor(Sqrt(num))
@@ -372,14 +376,13 @@ TileCluster(usemons := 1)
         puttyHeight := (mwaBottom - mwaTop)/rows
         yPos := mwaTop
         xPos := mwaLeft
+        yCount:=0
 
-        i:=0
-        iMax:=num*A_Index
-        iMin:=num*(A_Index-1)
-        ;MsgBox %A_Index% monitor %xPos%,%yPos% start, %num% windows, %cols%x%rows%, %iMin%-%iMax%
+        i:=1
+        iMax+=num
+        ;MsgBox %A_Index% monitor %xPos%:%yPos% start, %num% windows, %cols%x%rows%, %iMin%-%iMax%
         for id, None in Cluster {
-            i++
-            if (i>=iMin and i<=iMax) {
+            if (i>=iMin and i<iMax and WinExist("ahk_id " id)) {
                 WinActivate ahk_id %id%
                 WM_ENTERSIZEMOVE=0x0231
                 WM_EXITSIZEMOVE=0x0232
@@ -390,11 +393,13 @@ TileCluster(usemons := 1)
                 yPos := yPos + puttyHeight
                 if (yCount >= rows) {
                     xPos := xPos + puttyWidth
-                    yPos := 0
+                    yPos := mwaTop
                     yCount := 0
                 }
             }
+            i++
         }
+        iMin:=iMax
     }
 }
 

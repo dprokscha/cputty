@@ -397,7 +397,8 @@ TileCluster(usemons := 1)
                     yCount := 0
                 }
             }
-            i++
+            IfWinExist, ahk_id %id%
+                i++            
         }
         iMin:=iMax
     }

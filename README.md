@@ -27,7 +27,7 @@ Are you one of the poor who have to make the same changes on multiple servers wi
 ``Ctrl`` + ``Alt`` + ``5-0`` - Adds the active PuTTY window to a cluster group (see [extended usage](#extended-usage))  
 ``Ctrl`` + ``Alt`` + ``Page Down`` - Stop sending events to other windows  
 ``Ctrl`` + ``Alt`` + ``Page Up`` - Resumes event sending  
-``Ctrl`` + ``Alt`` + ``Home`` - Brings all windows from the default cluster to the top  
+``Ctrl`` + ``Alt`` + ``Home`` - Brings all windows from all clusters to the top  
 ``Ctrl`` + ``Alt`` + ``End`` - Removes windows from current cluster. Closes cPuTTY, if all clusters are empty.  
 ``Win`` + ``W`` - Auto-enter saved text (password). On first run asks for the text  
 ``Alt`` + ``G`` - Reload cPuTTY

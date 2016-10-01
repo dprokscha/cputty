@@ -540,6 +540,12 @@ Return
   AutoType()
 Return
 
+$<^<!Home::
+  FocusCluster(0)
+  Loop, 5
+    FocusCluster(A_Index + 4)
+Return
+
 $<^<!SC002::TileCluster(1)
 $<^<!SC003::TileCluster(2)
 $<^<!SC004::TileCluster(3)
@@ -550,7 +556,6 @@ $<^<!SC008::FocusCluster(7)
 $<^<!SC009::FocusCluster(8)
 $<^<!SC00A::FocusCluster(9)
 $<^<!SC00B::FocusCluster(0)
-$<^<!Home::FocusCluster(0)
 $<^<!End::StopClustering()
 ~RButton::ClusterMouse()
 

@@ -329,15 +329,15 @@ RemoveFromCluster() {
 }
 
 StopClustering() {
-  global AltDown
-  global Cluster
-  WinGet, WinActive, ID, A
-  if (Cluster.MaxIndex() == "") {
+  global AltDown, Cluster
+
+  if !Cluster.Length() {
     MsgBox, 36, cPuTTY, Do you really want to close cPuTTY?
     IfMsgBox, Yes
       ExitApp
   }
   AltDown := 0
+  WinGet, WinActive, ID, A
   if (Cluster[WinActive] != "") {
     SplashTextOn, 300, 70, cPuTTY, % "Clearing group " . Cluster[WinActive]
 
@@ -465,6 +465,8 @@ TimerJobs() {
       Cluster:=[]
     Return
   }
+  if !Cluster.Length() and A_IsSuspended
+    Return
 
   ; Clean up closed windows from Cluster array
   for win in Cluster {
@@ -546,6 +548,11 @@ $<^<!Home::
     FocusCluster(A_Index + 4)
 Return
 
+$<^<!End::
+  Suspend, Permit
+  StopClustering()
+Return
+
 $<^<!SC002::TileCluster(1)
 $<^<!SC003::TileCluster(2)
 $<^<!SC004::TileCluster(3)
@@ -556,7 +563,6 @@ $<^<!SC008::FocusCluster(7)
 $<^<!SC009::FocusCluster(8)
 $<^<!SC00A::FocusCluster(9)
 $<^<!SC00B::FocusCluster(0)
-$<^<!End::StopClustering()
 ~RButton::ClusterMouse()
 
 #IfWinActive ahk_group WindowGroup

@@ -18,16 +18,11 @@
 ; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 ; THE SOFTWARE.
 
-;#Warn
+#Warn
 #NoEnv
 #Persistent
 #SingleInstance force
 #WinActivateForce
-
-If !A_IsCompiled
-  Menu, Tray, Icon, %A_ScriptDir%\cputty.ico
-Else
-  Menu, Tray, Icon, %A_ScriptName%
 
 GroupAdd, WindowGroup, ahk_class FuTTY
 GroupAdd, WindowGroup, ahk_class KiTTY
@@ -172,7 +167,7 @@ class Keys {
   static Up          := [0     , 1       , 0x00, 0x00]
 }
 
-For k In Keys {
+for k in Keys {
   if (k != "__Class") {
     Hotkey, IfWinActive, ahk_group WindowGroup
     Hotkey, % "~*" k, ClusterKeyDown
@@ -438,71 +433,89 @@ TileCluster(usemons := 1) {
     }
 }
 
-SetTimer, RunTimerJobs, 1000
-RunTimerJobs() {
+AutoType(){
+  static txt := ""
   global Cluster
-  WinGet AllWindows, List, ahk_group WindowGroup
+  if (txt) {
+    WinGet, WinActive, ID, A
+    if (Cluster[WinActive] == "" or A_IsSuspended) {
+      Send, {Raw}%txt%
+      Send, {enter}
+      Return
+    }
+    SetKeyDelay, -1, 10
+    for win, grp in Cluster {
+      if (Cluster[WinActive] == grp) {
+        ControlSendRaw, , %txt%, ahk_id %win%
+        ControlSend, , {enter}, ahk_id %win%
+      }
+    }
+  }
+  else
+    InputBox, txt, cPuTTY auto type, , hide, 200, 100
+}
+
+SetTimer, TimerJobs, 1000
+TimerJobs() {
+  global Cluster, WindowGroup
+  WinGet wnds, List, ahk_group WindowGroup
+
+  if !wnds {
+    if Cluster.Length()
+      Cluster:=[]
+    Return
+  }
 
   ; Clean up closed windows from Cluster array
-  ClusterToDel := Object()
-  for WinClustered, Group in Cluster {
+  for win in Cluster {
     found := 0
-    Loop %AllWindows% {
-      if (WinClustered == AllWindows%A_Index%) {
+    Loop %wnds% {
+      if (win == wnds%A_Index%) {
         found := 1
       }
     }
-    if (found == 0) {
-      ClusterToDel[WinClustered] := Group
-    }
-  }
-  for ClusterDelItem in ClusterToDel {
-    Cluster.Remove(ClusterDelItem)
+    if !found
+      Cluster.Delete(win)
   }
 
-  ; Check each window to see if it is in the Cluster -> if not, add it to Group 0
-  Loop %AllWindows% {
-    CurWin := % AllWindows%A_Index%
-    match := 0
-    for WinClustered, Group in Cluster {
-      if (CurWin == WinClustered) {
-        match := 1
-      }
-    }
-    if (match != 1) {
-      ; No group assigned (new window opened or script just restarted)
-      WinGetTitle, Title, ahk_id %CurWin%
-      TitleGroupCheck := RegExMatch(Title, "([0-9])# .*", TitleGroup, 1)
-      If (TitleGroupCheck == 0) {
+  ; Check each window
+  WinGet, WinActive, ID, A
+  GrpActive := Cluster[WinActive]
+  Loop %wnds% {
+    win := % wnds%A_Index%
+    WinGetTitle, Title, ahk_id %win%
+    ; No group assigned (new window opened or script just restarted)
+    if !Cluster.HasKey(win) {
+      if !RegExMatch(Title, "([05-9])(:|>) .*", match, 1) {
         ; No current group found. Assign to group 0
-        Cluster[CurWin] := 0
-      } Else {
+        Cluster[win] := 0
+      } else {
         ; Previous group found.  Assign it to previous group
-        Cluster[CurWin] := TitleGroup1
+        Cluster[win] := match1
       }
     }
-  }
-
-  ; Check each window to see if the title has a correct group label -> if not, fix it
-  Loop %AllWindows% {
-    CurWin := % AllWindows%A_Index%
-    for WinClustered, Group in Cluster {
-      if (CurWin == WinClustered) {
-        WinGetTitle, Title, ahk_id %CurWin%
-        TitleCheck := RegExMatch(Title, "[0-9]# (.*)", TitleWithoutGroup, 1)
-        If (TitleCheck == 0) {
-          ; No group found in window title -> Add it
-          NewTitle := Group . "# " . Title
-          WinSetTitle, ahk_id %CurWin%, , %NewTitle%
-        } Else {
-          TitleCheck2 := RegExMatch(Title, "[0-9]# (.*)", GroupFromTitle, 1)
-          NewTitle := Group . "# " . GroupFromTitle1
-          WinSetTitle, ahk_id %CurWin%, , %NewTitle%
-        }
-      }
-    }
+    ; Fix titles
+    grp := Cluster[win]
+    mark := (grp == GrpActive) ? "> " : ": "
+    if RegExMatch(Title, "[05-9](:|>) (.*)", match, 1)
+      Title := match2
+    else if (A_IsSuspended)
+      Continue
+    if (A_IsSuspended)
+      WinSetTitle, ahk_id %win%, , % Title
+    else
+      WinSetTitle, ahk_id %win%, , % grp . mark . Title
   }
 }
+
+SetIcon() {
+  if A_IsCompiled
+    Menu, Tray, Icon, %A_ScriptFullPath%
+  else
+    Menu, Tray, Icon, %A_ScriptDir%\cputty.ico
+  Menu, Tray, Tip, PuTTY Enabled
+}
+SetIcon()
 
 ; Hotkeys
 !g:: ; ALT+g - Reload script
@@ -510,40 +523,21 @@ RunTimerJobs() {
   Reload
 Return
 
-^!PgUp:: ; CTRL+ALT+PgUp - Enable "Sync Typing mode"
+^!PgUp:: ; CTRL+ALT+PgUp - Unpause
   Suspend, off
-  If (A_IsCompiled) {
-    Menu, Tray, Icon, %A_ScriptFullPath%,1
-  } Else {
-    Menu, Tray, Icon, %A_ScriptDir%\cputty.ico
-  }
+  SetIcon()
 Return
 
 ^!PgDn:: ; CTRL+ALT+PgDn - Pause
-  Menu, Tray, Icon, ,,1
+  Menu, Tray, Icon, ,,1 ; freeze
   Suspend, on
-  Menu, Tray, Icon, %A_WinDir%\system32\shell32.dll,48
+  Menu, Tray, Icon, %A_WinDir%\system32\shell32.dll, 48
+  Menu, Tray, Tip, PuTTY Paused
 Return
 
 #w:: ; Win+W autotype password
   Suspend, Permit
-  If pwd {
-    WinGet, WinActive, ID, A
-    if (Cluster[WinActive] == "" or A_IsSuspended) {
-      Send, {Raw}%pwd%
-      Send, {enter}
-      Return
-    }
-    SetKeyDelay, -1, 10
-    for WinClustered, Group in Cluster {
-      if (Cluster[WinActive] == Group) {
-        ControlSendRaw, , %pwd%, ahk_id %WinClustered%
-        ControlSend, , {enter}, ahk_id %WinClustered%
-      }
-    }
-  }
-  Else
-    InputBox, pwd, , , hide, 200, 100
+  AutoType()
 Return
 
 $<^<!SC002::TileCluster(1)
